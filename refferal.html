@@ -1,105 +1,128 @@
-<!DOCTYPE html><html lang="id">
+<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Form Booking Uhome</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Form Referral - Uhome</title>
   <style>
     body {
-      background-color: #fff7ef;
-      font-family: 'Arial', sans-serif;
-      color: #333;
-      padding: 0;
+      background-color: #0b1e3f;
+      font-family: Arial, sans-serif;
+      color: #fff;
       margin: 0;
-    }
-    .container {
-      max-width: 500px;
-      margin: 40px auto;
-      background: #ffffff;
-      border: 2px solid #f4a261;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
+      padding: 30px;
       text-align: center;
-      color: #e76f51;
     }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #102c57;
+      padding: 30px;
+      border-radius: 10px;
+      border: 2px solid gold;
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    }
+
+    .logo {
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 120px;
+    }
+
+    h2 {
+      color: gold;
+      margin-bottom: 25px;
+    }
+
     label {
       display: block;
       margin-top: 15px;
+      text-align: left;
       font-weight: bold;
     }
-    input, select, textarea {
+
+    input, textarea {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
       border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      margin-top: 20px;
-      width: 100%;
-      padding: 12px;
-      background-color: #e76f51;
-      color: white;
-      font-size: 16px;
       border: none;
+    }
+
+    button {
+      background-color: gold;
+      color: #0b1e3f;
+      border: none;
+      padding: 12px;
+      width: 100%;
+      margin-top: 20px;
+      font-weight: bold;
       border-radius: 5px;
       cursor: pointer;
     }
+
     button:hover {
-      background-color: #d35400;
+      background-color: #fdd835;
+    }
+
+    .tagline {
+      margin-top: 40px;
+      font-size: 18px;
+      font-weight: bold;
+      color: gold;
     }
   </style>
 </head>
 <body>
+
+  <!-- Logo Uhome -->
+  <div class="logo">
+    <img src="https://i.imgur.com/TZand2O.png" alt="Logo Uhome">
+  </div>
+
   <div class="container">
-    <h2>Form Booking Properti</h2>
-    <form onsubmit="return kirimWA()">
-      <label for="nama">Nama Lengkap</label>
-      <input type="text" id="nama" required><label for="telepon">Nomor WhatsApp</label>
-  <input type="text" id="telepon" required>
+    <h2>Form Referral</h2>
 
-  <label for="tipe">Pilih Tipe Rumah</label>
-  <select id="tipe" required>
-    <option value="">-- Pilih --</option>
-    <option value="Tipe 42">Tipe 42</option>
-    <option value="Tipe 50">Tipe 50</option>
-    <option value="Tipe 70">Tipe 70</option>
-  </select>
+    <form onsubmit="kirimWA(); return false;">
+      <label>Nama Anda (Referral)</label>
+      <input type="text" id="nama" required>
 
-  <label for="lokasi">Lokasi Cluster</label>
-  <select id="lokasi" required>
-    <option value="">-- Pilih --</option>
-    <option value="Goldenland Residence Pakisaji">Goldenland Pakisaji</option>
-    <option value="Tambak Asri">Tambak Asri</option>
-    <option value="Bakalan Bululawang">Bakalan</option>
-    <option value="Bululawang Permai">Bululawang</option>
-  </select>
+      <label>No. Telepon Anda</label>
+      <input type="text" id="telepon" required>
 
-  <label for="jadwal">Jadwal Kunjungan</label>
-  <input type="date" id="jadwal">
+      <label>Nama Calon Pembeli</label>
+      <input type="text" id="namaPembeli" required>
 
-  <label for="catatan">Catatan Tambahan</label>
-  <textarea id="catatan" rows="3"></textarea>
+      <label>No. Telepon Calon Pembeli</label>
+      <input type="text" id="teleponPembeli" required>
 
-  <button type="submit">BOOKING</button>
-</form>
+      <label>Catatan Tambahan</label>
+      <textarea id="catatan" rows="3"></textarea>
 
-  </div>  <script>
+      <button type="submit">submit</button>
+    </form>
+  </div>
+
+  <!-- Tagline -->
+  <div class="tagline">Bonus referral Rp 500.000</div>
+
+  <script>
     function kirimWA() {
-      const nama = document.getElementById("nama").value;
-      const telp = document.getElementById("telepon").value;
-      const tipe = document.getElementById("tipe").value;
-      const lokasi = document.getElementById("lokasi").value;
-      const jadwal = document.getElementById("jadwal").value;
-      const catatan = document.getElementById("catatan").value;
+      let nama = document.getElementById("nama").value;
+      let telepon = document.getElementById("telepon").value;
+      let namaPembeli = document.getElementById("namaPembeli").value;
+      let teleponPembeli = document.getElementById("teleponPembeli").value;
+      let catatan = document.getElementById("catatan").value;
 
-      const pesan = `Halo, saya ingin booking properti:\n\nNama: ${nama}\nWhatsApp: ${telp}\nTipe Rumah: ${tipe}\nLokasi: ${lokasi}\nJadwal Kunjungan: ${jadwal}\nCatatan: ${catatan}`;
+      let pesan = `Halo Uhome,%0ASaya ingin mendaftarkan referral:%0A%0A*Nama Saya:* ${nama}%0A*Telepon Saya:* ${telepon}%0A%0A*Calon Pembeli:* ${namaPembeli}%0A*No. Telepon:* ${teleponPembeli}%0A%0A*Catatan:* ${catatan}`;
 
-      const url = `https://wa.me/6282220009945?text=${encodeURIComponent(pesan)}`;
-      window.open(url, '_blank');
-      return false;
+      let waURL = `https://wa.me/6282220009945?text=${pesan}`;
+      window.open(waURL, "_blank");
     }
-  </script></body>
+  </script>
+
+</body>
 </html>
