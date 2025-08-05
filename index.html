@@ -1,10 +1,14 @@
-<!DOCTYPE html>
+from pathlib import Path
+
+# Final responsive and interactive HTML code for UHOME
+html_code = """<!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>UHOME - Landing Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
   <style>
     body {
       margin: 0;
@@ -39,10 +43,11 @@
       overflow: hidden;
     }
 
-    .banner-slider img {
+    .swiper-slide img {
       width: 100%;
       height: auto;
       display: block;
+      object-fit: cover;
     }
 
     .top-banner-wrapper {
@@ -53,6 +58,7 @@
 
     .top-banner {
       width: 90%;
+      max-width: 1200px;
       height: 150px;
       border: 5px solid gold;
       border-radius: 10px;
@@ -63,12 +69,12 @@
       background-color: #fff;
     }
 
-   .top-banner {
-  width: 90%;
-  max-width: 1200px;
-  height: 150px;
-  border: 5px solid gold;
-}
+    .top-banner img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: cover;
+    }
+
     .hero {
       background: url('hero.jpg') no-repeat center center/cover;
       color: white;
@@ -136,12 +142,19 @@
       border-radius: 5px;
       text-decoration: none;
       margin-top: 10px;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .view-button:hover {
+      background-color: #ff9900;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
     }
 
     .testimonials, .visit-deal {
       background-color: #0f2b5b;
       color: white;
       padding: 40px 20px;
+      text-align: center;
     }
 
     .testimonial-card {
@@ -160,6 +173,12 @@
       border-radius: 10px;
     }
 
+    iframe {
+      width: 100%;
+      height: 400px;
+      border: none;
+    }
+
     footer {
       background: #0f2b5b;
       color: white;
@@ -174,10 +193,34 @@
     .social-icons a {
       margin: 0 10px;
       text-decoration: none;
-      color: white;
+    }
+
+    .social-icons img {
+      width: 32px;
+      height: 32px;
+      transition: transform 0.3s ease;
+    }
+
+    .social-icons img:hover {
+      transform: scale(1.2);
     }
 
     @media (max-width: 768px) {
+      nav {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .top-banner {
+        height: auto;
+      }
+
       .property-list {
         flex-direction: column;
         align-items: center;
@@ -202,8 +245,12 @@
     </nav>
   </header>
 
-  <div class="banner-slider">
-    <img src="banerslide.jpg" alt="Banner Iklan">
+  <div class="banner-slider swiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide"><img src="banerslide.jpg" alt="Banner 1"></div>
+      <div class="swiper-slide"><img src="baner2.jpg" alt="Banner 2"></div>
+      <div class="swiper-slide"><img src="baner3.jpg" alt="Banner 3"></div>
+    </div>
   </div>
 
   <div class="top-banner-wrapper">
@@ -216,7 +263,6 @@
     <h1>Beli Rumah Tanpa Ribet!</h1>
     <p>Bareng Uhome Saja!!</p>
   </div>
-
 
   <section class="section">
     <img src="logouhomefix.png" alt="Logo Uhome" style="width:100px; margin-bottom:10px;">
@@ -290,11 +336,31 @@
     <h3>Media Share</h3>
     <div class="social-icons">
       <a href="#"><img src="instagram.png" alt="Instagram"></a>
-       <a href="#"><img src="facebook.png" alt="facebook"></a>
+      <a href="#"><img src="facebook.png" alt="Facebook"></a>
       <a href="#"><img src="tiktok.png" alt="TikTok"></a>
       <a href="#"><img src="email.png" alt="Email"></a>
       <a href="#"><img src="whatsapp.png" alt="WhatsApp"></a>
     </div>
   </footer>
+
+  <!-- Swiper.js (untuk slider banner) -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false,
+      },
+      effect: 'fade',
+      speed: 1000,
+    });
+  </script>
 </body>
 </html>
+"""
+
+# Save HTML file
+output_path = Path("/mnt/data/uhome_landing_responsive.html")
+output_path.write_text(html_code, encoding="utf-8")
+output_path.name
