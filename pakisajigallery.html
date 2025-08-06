@@ -1,0 +1,55 @@
+<!DOCTYPE html><htmllang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gallery - Goldenland Pakisaji</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+      text-align: center;
+    }
+    h1 {
+      background-color: #13315c;
+      color: #fff;
+      padding: 20px 0;
+      margin: 0;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 15px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .back-button {
+      display: inline-block;
+      margin: 30px 0;
+      background-color: #13315c;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Galeri Goldenland Pakisaji</h1>
+  <div class="gallery">
+    <img src="pakisaji1.jpg" alt="Goldenland Pakisaji 1">
+    <img src="pakisaji2.jpg" alt="Goldenland Pakisaji 2">
+    <img src="pakisaji3.jpg" alt="Goldenland Pakisaji 3">
+    <img src="pakisaji4.jpg" alt="Goldenland Pakisaji 4">
+  </div>
+  <a href="gallery.html" class="back-button">⬅ Kembali ke Gallery</a>
+</body>
+</html>
