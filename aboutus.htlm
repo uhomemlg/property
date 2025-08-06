@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tentang Kami - UHOME</title>
+  <style>
+    body {
+      background-color: #f0f0f0;
+      color: #333;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #13315c;
+      margin-bottom: 20px;
+    }
+    .about-text {
+      font-size: 16px;
+      line-height: 1.8;
+      text-align: justify;
+    }
+    .logo {
+      display: block;
+      margin: 20px auto;
+      max-width: 200px;
+    }
+    .highlight {
+      font-weight: bold;
+      color: #13315c;
+    }
+    .contact-button {
+      display: block;
+      text-align: center;
+      margin-top: 30px;
+    }
+    .contact-button a {
+      background-color: #13315c;
+      color: #fff;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <img src="logouhome.png" alt="Logo UHOME" class="logo">
+    <h1>Tentang Kami</h1>
+    <div class="about-text">
+      <p><span class="highlight">UHOME</span> adalah agency properti yang berkomitmen untuk membantu masyarakat menemukan hunian impian dengan proses yang mudah, transparan, dan terpercaya.</p>
+      <p>Sejak berdiri, kami telah membantu ratusan keluarga mendapatkan rumah terbaik sesuai kebutuhan dan anggaran mereka. Kami menghadirkan berbagai pilihan properti, mulai dari rumah minimalis hingga cluster eksklusif, lengkap dengan legalitas yang jelas dan fasilitas yang mendukung kenyamanan hidup Anda.</p>
+      <p>Dengan tim profesional dan dukungan teknologi digital, UHOME siap memberikan layanan terbaik mulai dari kunjungan lokasi, konsultasi KPR, hingga proses transaksi yang aman.</p>
+      <p>Jika Anda sedang mencari hunian atau ingin berinvestasi properti di wilayah Malang dan sekitarnya, <span class="highlight">UHOME</span> adalah solusi tepat untuk Anda.</p>
+    </div>
+    <div class="contact-button">
+      <a href="https://wa.me/6282220009945" target="_blank">Hubungi Kami via WhatsApp</a>
+    </div>
+  </div>
+</body>
+</html>
