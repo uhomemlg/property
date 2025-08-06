@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery Property - Uhome</title>
+  <style>
+    body {
+      margin: 0;
+      background: radial-gradient(circle at top left, #001f4d, #000d26);
+      font-family: Arial, sans-serif;
+      color: white;
+      text-align: center;
+    }
+    .logo {
+      margin: 20px 0 10px;
+    }
+    .logo img {
+      height: 50px;
+    }
+    h1 {
+      font-size: 36px;
+      margin: 10px 0 30px;
+    }
+    .gallery-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 20px;
+    }
+    .property-box {
+      width: 150px;
+      border-radius: 20px;
+      background-color: white;
+      padding: 10px;
+      color: black;
+      cursor: pointer;
+      transition: transform 0.2s ease-in-out;
+    }
+    .property-box:hover {
+      transform: scale(1.05);
+    }
+    .property-inner {
+      border-radius: 15px;
+      padding: 10px;
+      color: white;
+    }
+    .pakisaji { background: linear-gradient(to bottom, #004080, #0066cc); }
+    .tambakasri { background: linear-gradient(to bottom, #33cc33, #66ff66); }
+    .bakalan { background: linear-gradient(to bottom, #ff6600, #ff9933); }
+    .bululawang { background: linear-gradient(to bottom, #006600, #009900); }
+    .click-button {
+      background: orange;
+      color: black;
+      padding: 5px;
+      font-size: 12px;
+      margin-top: 10px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .kembali {
+      margin-top: 50px;
+    }
+    .kembali a {
+      text-decoration: none;
+      background-color: white;
+      color: #13315c;
+      padding: 10px 25px;
+      border-radius: 20px;
+      font-weight: bold;
+      display: inline-block;
+    }
+    @media (max-width: 768px) {
+      .property-box {
+        width: 45%;
+      }
+    }
+    @media (max-width: 480px) {
+      .property-box {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="logo">
+    <img src="uhome-logo.png" alt="Uhome Logo">
+  </div>
+  <h1>Gallery Property</h1>
+  <div class="gallery-container">
+    <div class="property-box" onclick="location.href='pakisaji-gallery.html'">
+      <div class="property-inner pakisaji">
+        <p><strong>GOLDENLAND RESIDENCE</strong></p>
+        <div class="click-button">CLICK HERE 🔗</div>
+        <p><small>PAKISAJI</small></p>
+      </div>
+    </div>
+    <div class="property-box" onclick="location.href='tambakasri-gallery.html'">
+      <div class="property-inner tambakasri">
+        <p><strong>CLUSTER GOLDENLAND</strong></p>
+        <div class="click-button">CLICK HERE 🔗</div>
+        <p><small>TAMBAKASRI</small></p>
+      </div>
+    </div>
+    <div class="property-box" onclick="location.href='bakalan-gallery.html'">
+      <div class="property-inner bakalan">
+        <p><strong>GOLDENLAND BAKALAN</strong></p>
+        <div class="click-button">CLICK HERE 🔗</div>
+        <p><small>BAKALAN</small></p>
+      </div>
+    </div>
+    <div class="property-box" onclick="location.href='bululawang-gallery.html'">
+      <div class="property-inner bululawang">
+        <p><strong>BULULAWANG PERMAI</strong></p>
+        <div class="click-button">CLICK HERE 🔗</div>
+        <p><small>BULULAWANG</small></p>
+      </div>
+    </div>
+  </div>
+  <div class="kembali">
+    <a href="index.html">⬅ kembali ke beranda</a>
+  </div>
+</body>
+</html>
