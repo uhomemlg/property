@@ -1,108 +1,86 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Simulasi KPR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #F97E1F;
-      color: #fff;
+      background: orange;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      padding: 20px;
-      text-align: center;
     }
-
     .container {
-      max-width: 400px;
-      margin: auto;
-      background: #FFB600;
+      background: gold;
       padding: 20px;
       border-radius: 10px;
-      border: 2px solid gold;
+      max-width: 400px;
+      width: 100%;
+      text-align: center;
     }
-
-    h2 {
-      color: #0b1e3f;
-    }
-
-    label {
-      display: block;
-      margin-top: 15px;
-      text-align: left;
-    }
-
     input {
       width: 100%;
       padding: 10px;
-      margin-top: 5px;
+      margin: 10px 0;
       border-radius: 5px;
       border: none;
-      font-size: 16px;
     }
-
     button {
-      background: gold;
-      color: #0b1e3f;
+      background: darkorange;
+      color: white;
       border: none;
-      padding: 12px;
+      padding: 10px;
       width: 100%;
-      font-weight: bold;
-      margin-top: 20px;
-      border-radius: 5px;
       cursor: pointer;
-    }
-
-    button:disabled {
-      background: gray;
-      cursor: not-allowed;
+      font-weight: bold;
+      border-radius: 5px;
     }
   </style>
 </head>
 <body>
-
   <div class="container">
     <h2>Masuk untuk Simulasi KPR</h2>
-    <form id="loginForm">
-      <label>Nama Lengkap</label>
-      <input type="text" id="nama" name="nama" required placeholder="Masukkan Nama Anda" />
-
-      <label>Nomor WhatsApp</label>
-      <input type="tel" id="wa" name="wa" required placeholder="Contoh: 0812xxxxxxx" />
-
-      <button type="submit">Lanjut ke Simulasi</button>
-    </form>
+    <input type="text" id="nama" placeholder="Nama Lengkap" required>
+    <input type="text" id="nomor" placeholder="Nomor WhatsApp" required>
+    <button onclick="kirimData()">Lanjut ke Simulasi</button>
   </div>
 
   <script>
-    const scriptURL = "https://script.google.com/macros/s/AKfycbyNT0D6Brh7igPMruR4jsk158rhAYy5FCIfOs-bdzV2-uSYONM_mlep64xgQqw1YMvc/exec";
+    function kirimData() {
+      let nama = document.getElementById("nama").value.trim();
+      let nomor = document.getElementById("nomor").value.trim();
 
-    document.getElementById('loginForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      let nama = document.getElementById('nama').value.trim();
-      let wa = document.getElementById('wa').value.trim();
-
-      if (!nama || !wa) {
-        alert("Harap isi semua kolom!");
+      if (!nama || !nomor) {
+        alert("Harap isi semua data");
         return;
       }
 
-      fetch(scriptURL, {
-        method: 'POST',
-        body: new URLSearchParams({ nama: nama, wa: wa })
-      })
-      .then(response => {
-        if (response.ok) {
-          window.location.href = "simulasi-kpr.html"; // redirect setelah tersimpan
-        } else {
-          alert("Gagal menyimpan data. Coba lagi!");
+      fetch("https://script.google.com/macros/s/AKfycbwzC1DVJUVAIKmzl62nmCTPizHeBLQXdF80rna5vQotaIMpwB7kMbZsXIlhuxC2Kal_/exec", {
+        method: "POST",
+        body: JSON.stringify({
+          nama: nama,
+          nomor: nomor
+        }),
+        headers: {
+          "Content-Type": "application/json"
         }
       })
-      .catch(error => alert("Terjadi kesalahan: " + error.message));
-    });
+      .then(res => res.json())
+      .then(data => {
+        if (data.status === "success") {
+          window.location.href = "simulasi-kpr.html";
+        } else {
+          alert("Gagal menyimpan: " + data.message);
+        }
+      })
+      .catch(err => {
+        alert("Error: " + err);
+      });
+    }
   </script>
-
 </body>
 </html>
