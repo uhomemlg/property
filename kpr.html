@@ -44,15 +44,15 @@
 <div class="container">
   <h2>Masuk untuk Simulasi KPR</h2>
   <input type="text" id="nama" placeholder="Nama Lengkap" required />
-  <input type="text" id="nomor" placeholder="Nomor WhatsApp" required />
+  <input type="text" id="whatsapp" placeholder="Nomor WhatsApp" required />
   <button onclick="kirimData()">Lanjut ke Simulasi</button>
 </div>
 
 <script>
   function kirimData() {
     const nama = document.getElementById('nama').value.trim();
-    const nomor = document.getElementById('nomor').value.trim();
-    if (!nama || !nomor) {
+    const nomor = document.getElementById('whatsapp').value.trim();
+    if (!nama || !whatsapp) {
       alert("Isi semua kolom!");
       return;
     }
@@ -61,7 +61,7 @@
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nama: nama, nomor: nomor })
+      body: JSON.stringify({ nama: nama, whatsapp: whatsapp })
     })
     .then(() => {
       window.location.href = "simulasi-kpr.html";
