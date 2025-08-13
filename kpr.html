@@ -1,86 +1,76 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login Simulasi KPR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: orange;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background-color: orange;
       margin: 0;
+      padding: 0;
     }
     .container {
-      background: gold;
+      max-width: 400px;
+      margin: 60px auto;
+      background: #ffcc66;
       padding: 20px;
       border-radius: 10px;
-      max-width: 400px;
-      width: 100%;
       text-align: center;
     }
     input {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin: 8px 0;
       border-radius: 5px;
-      border: none;
+      border: 1px solid #ccc;
+      font-size: 16px;
     }
     button {
-      background: darkorange;
-      color: white;
-      border: none;
+      background: #0b1e3f;
+      color: #fff;
       padding: 10px;
       width: 100%;
-      cursor: pointer;
-      font-weight: bold;
+      font-size: 16px;
+      border: none;
       border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Masuk untuk Simulasi KPR</h2>
-    <input type="text" id="nama" placeholder="Nama Lengkap" required>
-    <input type="text" id="nomor" placeholder="Nomor WhatsApp" required>
-    <button onclick="kirimData()">Lanjut ke Simulasi</button>
-  </div>
 
-  <script>
-    function kirimData() {
-      let nama = document.getElementById("nama").value.trim();
-      let nomor = document.getElementById("nomor").value.trim();
+<div class="container">
+  <h2>Masuk untuk Simulasi KPR</h2>
+  <input type="text" id="nama" placeholder="Nama Lengkap" required />
+  <input type="text" id="nomor" placeholder="Nomor WhatsApp" required />
+  <button onclick="kirimData()">Lanjut ke Simulasi</button>
+</div>
 
-      if (!nama || !nomor) {
-        alert("Harap isi semua data");
-        return;
-      }
-
-      fetch(https://script.google.com/macros/s/AKfycbwzC1DVJUVAIKmzl62nmCTPizHeBLQXdF80rna5vQotaIMpwB7kMbZsXIlhuxC2Kal_/exec"", {
-        method: "POST",
-        body: JSON.stringify({
-          nama: nama,
-          nomor: nomor
-        }),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(res => res.json())
-      .then(data => {
-        if (data.status === "success") {
-          window.location.href = "simulasi-kpr.html";
-        } else {
-          alert("Gagal menyimpan: " + data.message);
-        }
-      })
-      .catch(err => {
-        alert("Error: " + err);
-      });
+<script>
+  function kirimData() {
+    const nama = document.getElementById('nama').value.trim();
+    const nomor = document.getElementById('nomor').value.trim();
+    if (!nama || !nomor) {
+      alert("Isi semua kolom!");
+      return;
     }
-  </script>
+
+    fetch("https://script.google.com/macros/s/AKfycbxgiyN4cxM6tw4G0syVy89_uq295nWvu7_gHgKvRFoihiKV936nOVVK9IQxeBF13g7frw/exec", {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nama: nama, nomor: nomor })
+    })
+    .then(() => {
+      window.location.href = "simulasi-kpr.html";
+    })
+    .catch(err => {
+      alert("Gagal mengirim data: " + err);
+    });
+  }
+</script>
+
 </body>
 </html>
