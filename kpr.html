@@ -3,31 +3,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Simulasi KPR - Uhome</title>
+  <title>Login Simulasi KPR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #0b1e3f;
+      background-color: #F97E1F;
       color: #fff;
       margin: 0;
       padding: 20px;
+      text-align: center;
     }
-    .hidden { display: none; }
-
-    .logo-container { text-align: center; margin-top: 30px; }
-    .logo-container img { height: 200px; }
 
     .container {
-      max-width: 500px;
-      margin: 30px auto;
-      background: #102c57;
+      max-width: 400px;
+      margin: auto;
+      background: #FFB600;
+      padding: 20px;
       border-radius: 10px;
-      padding: 30px;
       border: 2px solid gold;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
     }
-    h2 { text-align: center; color: gold; margin-bottom: 25px; }
-    label { margin-top: 10px; display: block; font-weight: bold; }
+
+    h2 {
+      color: #0b1e3f;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      text-align: left;
+    }
+
     input {
       width: 100%;
       padding: 10px;
@@ -36,6 +41,7 @@
       border: none;
       font-size: 16px;
     }
+
     button {
       background: gold;
       color: #0b1e3f;
@@ -47,119 +53,56 @@
       border-radius: 5px;
       cursor: pointer;
     }
-    #hasil { text-align: center; margin-top: 20px; font-size: 18px; }
-    #wa-button { display: none; margin-top: 15px; text-align: center; }
-    #wa-button a {
-      display: inline-block;
-      padding: 10px 20px;
-      background-color: #25D366;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 5px;
+
+    button:disabled {
+      background: gray;
+      cursor: not-allowed;
     }
   </style>
 </head>
 <body>
 
-  <div class="logo-container">
-    <img src="https://i.imgur.com/TZand2O.png" alt="Logo Uhome">
-  </div>
-
-  <!-- Form Login -->
-  <div id="login-form" class="container">
+  <div class="container">
     <h2>Masuk untuk Simulasi KPR</h2>
-    <label>Nama</label>
-    <input type="text" id="nama" placeholder="Nama lengkap" />
-    <label>Nomor WhatsApp</label>
-    <input type="text" id="wa" placeholder="Contoh: 082220009945" />
-    <button onclick="login()">Lanjutkan</button>
+    <form id="loginForm">
+      <label>Nama Lengkap</label>
+      <input type="text" id="nama" name="nama" required placeholder="Masukkan Nama Anda" />
+
+      <label>Nomor WhatsApp</label>
+      <input type="tel" id="wa" name="wa" required placeholder="Contoh: 0812xxxxxxx" />
+
+      <button type="submit">Lanjut ke Simulasi</button>
+    </form>
   </div>
 
-  <!-- Form Simulasi -->
-  <div id="simulasi-form" class="container hidden">
-    <h2>Simulasi KPR</h2>
-    <label>Harga Rumah (Rp)</label>
-    <input type="text" id="harga" placeholder="Contoh: Rp 525.000.000" oninput="formatRupiah(this)" />
-    <label>Uang Muka (DP) (Rp)</label>
-    <input type="text" id="dp" placeholder="Contoh: Rp 100.000.000" oninput="formatRupiah(this)" />
-    <label>Tenor (Tahun)</label>
-    <input type="number" id="tenor" placeholder="Contoh: 30" />
-    <label>Suku Bunga (%)</label>
-    <input type="number" id="bunga" placeholder="Contoh: 5,25" />
-    <button onclick="hitungKPR()">H I T U N G</button>
-    <div id="hasil"></div>
-    <div id="wa-button">
-      <a href="https://wa.me/6282220009945?text=Halo%20saya%20ingin%20konsultasi%20mengenai%20KPR%20di%20Uhome" target="_blank">
-        Tanya KPR
-      </a>
-    </div>
-  </div>
+  <script>
+    const scriptURL = "https://script.google.com/macros/s/AKfycbwzwZRMkh9xxnsy9V9DsyziQc5sWDfrgylCkQHVtxv8XuJOyi98zMmz2l12EjszXsl9/exec";
 
-<script>
-  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwzwZRMkh9xxnsy9V9DsyziQc5sWDfrgylCkQHVtxv8XuJOyi98zMmz2l12EjszXsl9/exec";
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
 
-  function formatRupiah(input) {
-    let value = input.value.replace(/[^0-9]/g, '');
-    let formatted = new Intl.NumberFormat('id-ID').format(value);
-    input.value = 'Rp ' + formatted;
-  }
-  function parseRupiah(rp) {
-    return parseInt(rp.replace(/[^0-9]/g, '')) || 0;
-  }
+      let nama = document.getElementById('nama').value.trim();
+      let wa = document.getElementById('wa').value.trim();
 
-  function login() {
-    let nama = document.getElementById('nama').value.trim();
-    let wa = document.getElementById('wa').value.trim();
-    if (!nama || !wa) {
-      alert("Nama dan Nomor WhatsApp wajib diisi.");
-      return;
-    }
-    localStorage.setItem("nama", nama);
-    localStorage.setItem("wa", wa);
-    document.getElementById('login-form').classList.add('hidden');
-    document.getElementById('simulasi-form').classList.remove('hidden');
-  }
+      if (!nama || !wa) {
+        alert("Harap isi semua kolom!");
+        return;
+      }
 
-  function hitungKPR() {
-    let harga = parseRupiah(document.getElementById('harga').value);
-    let dp = parseRupiah(document.getElementById('dp').value);
-    let tenor = parseInt(document.getElementById('tenor').value);
-    let bunga = parseFloat(document.getElementById('bunga').value) / 100;
-
-    if (!harga || !dp || !tenor || isNaN(bunga)) {
-      alert("Mohon isi semua kolom dengan benar.");
-      return;
-    }
-
-    let pinjaman = harga - dp;
-    let bungaBulanan = bunga / 12;
-    let jumlahCicilan = (pinjaman * bungaBulanan) / 
-                        (1 - Math.pow(1 + bungaBulanan, -tenor * 12));
-
-    document.getElementById('hasil').innerHTML =
-      Estimasi cicilan per bulan:<br><b>Rp ${Math.round(jumlahCicilan).toLocaleString('id-ID')}</b>;
-    document.getElementById('wa-button').style.display = 'block';
-
-    // Kirim data ke Google Sheets
-    const data = {
-      nama: localStorage.getItem("nama"),
-      wa: localStorage.getItem("wa"),
-      harga: harga,
-      dp: dp,
-      tenor: tenor,
-      bunga: bunga * 100,
-      cicilan: Math.round(jumlahCicilan)
-    };
-
-    fetch(SCRIPT_URL, {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({ nama: nama, wa: wa })
+      })
+      .then(response => {
+        if (response.ok) {
+          window.location.href = "simulasi-kpr.html"; // redirect setelah tersimpan
+        } else {
+          alert("Gagal menyimpan data. Coba lagi!");
+        }
+      })
+      .catch(error => alert("Terjadi kesalahan: " + error.message));
     });
-  }
-</script>
+  </script>
 
 </body>
 </html>
