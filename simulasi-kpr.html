@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -19,7 +20,7 @@
     }
 
     .logo-container img {
-      height: 200px;
+      height: 150px;
     }
 
     .container {
@@ -98,37 +99,36 @@
     <h2>Simulasi KPR</h2>
 
     <label>Harga Rumah (Rp)</label>
-    <input type="text" id="harga" placeholder="Contoh: Rp 525.000.000" oninput="formatRupiah(this)" />
+    <input type="text" id="harga" placeholder="525.000.000" oninput="formatRupiah(this)" />
 
     <label>Uang Muka (DP) (Rp)</label>
-    <input type="text" id="dp" placeholder="Contoh: Rp 100.000.000" oninput="formatRupiah(this)" />
+    <input type="text" id="dp" placeholder="100.000.000" oninput="formatRupiah(this)" />
 
     <label>Tenor (Tahun)</label>
-    <input type="number" id="tenor" placeholder="Contoh: 30" />
+    <input type="number" id="tenor" placeholder="Contoh: 20" />
 
     <label>Suku Bunga (%)</label>
-    <input type="number" id="bunga" placeholder="Contoh: 5,25" />
+    <input type="number" step="0.01" id="bunga" placeholder="Contoh: 5.25" />
 
     <button onclick="hitungKPR()">H I T U N G</button>
 
     <div id="hasil"></div>
 
     <div id="wa-button">
-      <a href="https://wa.me/6282220009945?text=Halo%20saya%20ingin%20konsultasi%20mengenai%20KPR%20di%20Uhome" target="_blank">
-        Tanya KPR
+      <a id="wa-link" target="_blank">
+        Tanya KPR via WhatsApp
       </a>
     </div>
   </div>
 
   <script>
-    function formatRupiah(input) {
-      let value = input.value.replace(/[^0-9]/g, '');
-      let formatted = new Intl.NumberFormat('id-ID').format(value);
-      input.value = 'Rp ' + formatted;
+    function formatRupiah(el) {
+      let value = el.value.replace(/\D/g, "");
+      el.value = value ? new Intl.NumberFormat('id-ID').format(value) : "";
     }
 
-    function parseRupiah(rp) {
-      return parseInt(rp.replace(/[^0-9]/g, '')) || 0;
+    function parseRupiah(str) {
+      return parseInt(str.replace(/\D/g, "")) || 0;
     }
 
     function hitungKPR() {
@@ -147,9 +147,13 @@
       let jumlahCicilan = (pinjaman * bungaBulanan) / 
                           (1 - Math.pow(1 + bungaBulanan, -tenor * 12));
 
-      document.getElementById('hasil').innerHTML =
-        Estimasi cicilan per bulan:<br><b>Rp ${Math.round(jumlahCicilan).toLocaleString('id-ID')}</b>;
+      let cicilanFormatted = new Intl.NumberFormat('id-ID').format(Math.round(jumlahCicilan));
 
+      document.getElementById('hasil').innerHTML =
+        `Estimasi cicilan per bulan:<br><b>Rp ${cicilanFormatted}</b>`;
+
+      let waMessage = `Halo, saya ingin konsultasi KPR.%0AHarga rumah: Rp ${new Intl.NumberFormat('id-ID').format(harga)}%0ADP: Rp ${new Intl.NumberFormat('id-ID').format(dp)}%0ATenor: ${tenor} tahun%0ASuku bunga: ${document.getElementById('bunga').value}%0ACicilan per bulan: Rp ${cicilanFormatted}`;
+      document.getElementById('wa-link').href = `https://wa.me/6282220009945?text=${waMessage}`;
       document.getElementById('wa-button').style.display = 'block';
     }
   </script>
