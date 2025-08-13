@@ -1,76 +1,92 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login Simulasi KPR</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: orange;
+      background-color: #0b1e3f;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      padding: 0;
     }
     .container {
-      max-width: 400px;
-      margin: 60px auto;
-      background: #ffcc66;
-      padding: 20px;
+      background: #102c57;
+      padding: 25px;
       border-radius: 10px;
+      border: 2px solid gold;
+      box-shadow: 0 0 10px rgba(255,215,0,0.3);
+      width: 300px;
+    }
+    h2 {
       text-align: center;
+      color: gold;
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
     }
     input {
       width: 100%;
       padding: 10px;
-      margin: 8px 0;
+      margin-top: 5px;
       border-radius: 5px;
-      border: 1px solid #ccc;
+      border: none;
       font-size: 16px;
     }
     button {
-      background: #0b1e3f;
-      color: #fff;
-      padding: 10px;
-      width: 100%;
-      font-size: 16px;
+      background: gold;
+      color: #0b1e3f;
       border: none;
+      padding: 12px;
+      width: 100%;
+      font-weight: bold;
+      margin-top: 20px;
       border-radius: 5px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
+  <div class="container">
+    <h2>Login Simulasi KPR</h2>
+    <form id="loginForm">
+      <label>Nama Lengkap</label>
+      <input type="text" name="nama" placeholder="Masukkan nama" required>
 
-<div class="container">
-  <h2>Masuk untuk Simulasi KPR</h2>
-  <input type="text" id="nama" placeholder="Nama Lengkap" required />
-  <input type="text" id="whatsapp" placeholder="Nomor WhatsApp" required />
-  <button onclick="kirimData()">Lanjut ke Simulasi</button>
-</div>
+      <label>Nomor WhatsApp</label>
+      <input type="text" name="whatsapp" placeholder="08xxxxxxxxxx" required>
 
-<script>
-  function kirimData() {
-    const nama = document.getElementById('nama').value.trim();
-    const nomor = document.getElementById('whatsapp').value.trim();
-    if (!nama || !whatsapp) {
-      alert("Isi semua kolom!");
-      return;
-    }
+      <button type="submit">Lanjut Simulasi</button>
+    </form>
+  </div>
 
-    fetch("https://script.google.com/macros/s/AKfycbyQC4jF21jRNGUzeWs__rK3xFrsN8zWALxXXyWt8hBY6Xbx83_hjd8Vc3dMVoVrox4_uQ/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ nama: nama, whatsapp: whatsapp })
-    })
-    .then(() => {
-      window.location.href = "simulasi-kpr.html";
-    })
-    .catch(err => {
-      alert("Gagal mengirim data: " + err);
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      var formData = new FormData(this);
+
+      fetch("https://script.google.com/macros/s/AKfycbyQC4jF21jRNGUzeWs__rK3xFrsN8zWALxXXyWt8hBY6Xbx83_hjd8Vc3dMVoVrox4_uQ/exec", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(data => {
+        if (data.includes("Sukses")) {
+          window.location.href = "simulasi-kpr.html";
+        } else {
+          alert("Gagal menyimpan data, coba lagi.");
+        }
+      })
+      .catch(err => alert("Error koneksi: " + err));
     });
-  }
-</script>
-
+  </script>
 </body>
 </html>
