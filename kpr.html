@@ -14,6 +14,7 @@
       align-items: center;
       height: 100vh;
       margin: 0;
+      position: relative;
     }
     .container {
       background: #102c57;
@@ -22,6 +23,7 @@
       border: 2px solid gold;
       box-shadow: 0 0 10px rgba(255,215,0,0.3);
       width: 300px;
+      z-index: 2;
     }
     h2 {
       text-align: center;
@@ -52,6 +54,42 @@
       border-radius: 5px;
       cursor: pointer;
     }
+    /* Overlay loading */
+    .loading-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      z-index: 999;
+      color: white;
+    }
+    /* Animasi lingkaran 3D */
+    .spinner {
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid gold;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-bottom: 15px;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    /* Animasi teks naik turun */
+    .loading-text {
+      font-size: 18px;
+      animation: bounce 1s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
   </style>
 </head>
 <body>
@@ -68,10 +106,19 @@
     </form>
   </div>
 
+  <!-- Overlay loading -->
+  <div class="loading-overlay" id="loading">
+    <div class="spinner"></div>
+    <p class="loading-text">loading...</p>
+  </div>
+
   <script>
     document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
       var formData = new FormData(this);
+
+      // Tampilkan loading langsung
+      document.getElementById("loading").style.display = "flex";
 
       fetch("https://script.google.com/macros/s/AKfycbyQC4jF21jRNGUzeWs__rK3xFrsN8zWALxXXyWt8hBY6Xbx83_hjd8Vc3dMVoVrox4_uQ/exec", {
         method: "POST",
@@ -80,12 +127,18 @@
       .then(res => res.text())
       .then(data => {
         if (data.includes("Sukses")) {
-          window.location.href = "simulasi-kpr.html";
+          setTimeout(() => {
+            window.location.href = "simulasi-kpr.html";
+          }, 2000); // loading selama 2 detik
         } else {
           alert("Gagal menyimpan data, coba lagi.");
+          document.getElementById("loading").style.display = "none";
         }
       })
-      .catch(err => alert("Error koneksi: " + err));
+      .catch(err => {
+        alert("Error koneksi: " + err);
+        document.getElementById("loading").style.display = "none";
+      });
     });
   </script>
 </body>
