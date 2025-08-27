@@ -55,7 +55,7 @@
     }
     /* Loading overlay */
     .loading {
-      display: none;
+      display: none; /* default sembunyi */
       position: absolute;
       top: 0; left: 0;
       width: 100%; height: 100%;
@@ -63,10 +63,12 @@
       color: white;
       font-size: 18px;
       font-weight: bold;
-      display: flex;
       justify-content: center;
       align-items: center;
       border-radius: 10px;
+    }
+    .loading.active {
+      display: flex; /* tampil hanya setelah klik */
     }
     .spinner {
       border: 4px solid rgba(255,255,255,0.2);
@@ -107,7 +109,7 @@
       var nama = this.nama.value.trim();
       var whatsapp = this.whatsapp.value.trim();
 
-      // Validasi nomor WA (hanya angka, panjang 10-15 digit)
+      // Validasi nomor WA (hanya angka, panjang 10-15 digit, harus mulai 08)
       var waRegex = /^08[0-9]{8,13}$/;
       if (!waRegex.test(whatsapp)) {
         alert("Nomor WhatsApp tidak valid!\nMasukan nomer dengan benar.");
@@ -115,7 +117,7 @@
       }
 
       // Tampilkan loading
-      document.getElementById("loading").style.display = "flex";
+      document.getElementById("loading").classList.add("active");
 
       var formData = new FormData(this);
 
@@ -125,7 +127,7 @@
       })
       .then(res => res.text())
       .then(data => {
-        document.getElementById("loading").style.display = "none"; // sembunyikan loading
+        document.getElementById("loading").classList.remove("active"); // sembunyikan loading
         if (data.includes("Sukses")) {
           window.location.href = "simulasi-kpr.html";
         } else {
@@ -133,7 +135,7 @@
         }
       })
       .catch(err => {
-        document.getElementById("loading").style.display = "none";
+        document.getElementById("loading").classList.remove("active");
         alert("Error koneksi: " + err);
       });
     });
